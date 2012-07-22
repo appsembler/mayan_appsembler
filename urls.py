@@ -31,6 +31,9 @@ urlpatterns = patterns('',
     (r'^api/', include('rest_api.urls')),
     (r'^gpg/', include('django_gpg.urls')),
     (r'^documents/signatures/', include('document_signatures.urls')),
+    (r'^checkouts/', include('checkouts.urls')),
+    (r'^installation/', include('installation.urls')),
+    (r'^scheduler/', include('scheduler.urls')),
 )
 
 

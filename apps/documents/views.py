@@ -44,7 +44,7 @@ from .permissions import (PERMISSION_DOCUMENT_CREATE,
     PERMISSION_DOCUMENT_EDIT, PERMISSION_DOCUMENT_VERSION_REVERT,
     PERMISSION_DOCUMENT_TYPE_EDIT, PERMISSION_DOCUMENT_TYPE_DELETE,
     PERMISSION_DOCUMENT_TYPE_CREATE, PERMISSION_DOCUMENT_TYPE_VIEW)
-from .literals import (HISTORY_DOCUMENT_CREATED,
+from .events import (HISTORY_DOCUMENT_CREATED,
     HISTORY_DOCUMENT_EDITED, HISTORY_DOCUMENT_DELETED)
 from .forms import (DocumentTypeSelectForm,
         DocumentForm_edit, DocumentPropertiesForm,
@@ -130,8 +130,8 @@ def document_view(request, document_id, advanced=False):
     if advanced:
         document_properties_form = DocumentPropertiesForm(instance=document, extra_fields=[
             {'label': _(u'Filename'), 'field': 'filename'},
-            {'label': _(u'File mimetype'), 'field': 'file_mimetype'},
-            {'label': _(u'File mime encoding'), 'field': 'file_mime_encoding'},
+            {'label': _(u'File mimetype'), 'field': lambda x: x.file_mimetype or _(u'None')},
+            {'label': _(u'File mime encoding'), 'field': lambda x: x.file_mime_encoding or _(u'None')},
             {'label': _(u'File size'), 'field':lambda x: pretty_size(x.size) if x.size else '-'},
             {'label': _(u'Exists in storage'), 'field': 'exists'},
             {'label': _(u'File path in storage'), 'field': 'file'},
@@ -370,8 +370,8 @@ def document_download(request, document_id=None, document_id_list=None, document
 
                     return serve_file(
                         request,
-                        compressed_file.as_file('document_bundle.zip'),
-                        save_as=u'"document_bundle.zip"',
+                        compressed_file.as_file(form.cleaned_data['zip_filename']),
+                        save_as=u'"%s"' % form.cleaned_data['zip_filename'],
                         content_type='application/zip'
                     )
                     # TODO: DO a redirection afterwards
@@ -409,6 +409,7 @@ def document_download(request, document_id=None, document_id_list=None, document
         'submit_label': _(u'Download'),
         'previous': previous,
         'cancel_label': _(u'Return'),
+        'disable_auto_focus': True,
     }
 
     if len(document_versions) == 1:

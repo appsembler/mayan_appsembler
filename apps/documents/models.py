@@ -37,6 +37,7 @@ from .managers import DocumentPageTransformationManager
 from .utils import document_save_to_temp_dir
 from .literals import (RELEASE_LEVEL_FINAL, RELEASE_LEVEL_CHOICES,
     VERSION_UPDATE_MAJOR, VERSION_UPDATE_MINOR, VERSION_UPDATE_MICRO)
+from .exceptions import NewDocumentVersionNotAllowed
 
 # document image cache name hash function
 HASH_FUNCTION = lambda x: hashlib.sha256(x).hexdigest()
@@ -169,8 +170,11 @@ class Document(models.Model):
     def size(self):
         return self.latest_version.size
 
-    def new_version(self, file, comment=None, version_update=None, release_level=None, serial=None):
+    def new_version(self, file, user=None, comment=None, version_update=None, release_level=None, serial=None):
         logger.debug('creating new document version')
+        if not self.is_new_versions_allowed(user=user):
+            raise NewDocumentVersionNotAllowed
+
         if version_update:
             new_version_dict = self.latest_version.get_new_version_dict(version_update)
             logger.debug('new_version_dict: %s' % new_version_dict)
@@ -312,8 +316,8 @@ class DocumentVersion(models.Model):
 
     # File related fields
     file = models.FileField(upload_to=get_filename_from_uuid, storage=STORAGE_BACKEND(), verbose_name=_(u'file'))
-    mimetype = models.CharField(max_length=64, default='', editable=False)
-    encoding = models.CharField(max_length=64, default='', editable=False)
+    mimetype = models.CharField(max_length=64, null=True, blank=True, editable=False)
+    encoding = models.CharField(max_length=64, null=True, blank=True, editable=False)
     filename = models.CharField(max_length=255, default=u'', editable=False, db_index=True)
     checksum = models.TextField(blank=True, null=True, verbose_name=_(u'checksum'), editable=False)
 
@@ -520,8 +524,14 @@ class DocumentVersion(models.Model):
             return None
             
     def rename(self, new_name):
+        new_filename, new_extension = os.path.splitext(new_name)
         name, extension = os.path.splitext(self.filename)
-        self.filename = u''.join([new_name, extension])
+        
+        # Preserve existing extension if new name doesn't has one
+        if new_extension:
+            extension = new_extension
+
+        self.filename = u''.join([new_filename, extension])
         self.save()
 
 
