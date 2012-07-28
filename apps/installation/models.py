@@ -127,7 +127,7 @@ class Installation(Singleton):
                 )
                 
                 requests.post(FORM_SUBMIT_URL, data={'formkey': FORM_KEY, FORM_RECEIVER_FIELD: dumps(dictionary)}, timeout=TIMEOUT)
-            except (requests.exceptions.Timeout, requests.exceptions.ConnectionError):
+            except Exception:
                 pass
             else:
                 self.is_first_run = False
