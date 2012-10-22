@@ -19,3 +19,4 @@ python-hkp==0.1.3
 requests==0.13.1
 pbs==0.105
 psutil==0.5.1
+psycopg2==2.4.5
