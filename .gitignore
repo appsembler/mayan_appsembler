@@ -13,3 +13,4 @@ image_cache/
 build/
 _build/
 gpg_home/
+.DS_Store
