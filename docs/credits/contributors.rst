@@ -18,7 +18,9 @@ Bug fixes
 * Sergey Glita (s.v.glita@gmail.com)
 * Meurig Freeman (https://github.com/meurig)
 * David Herring (https://github.com/abadger1406)
-
+* Webfaction (https://www.webfaction.com)
+* Kolmar Kafran
+* Nate Aune (nate@appsembler.com)
 
 Bug reports
 -----------
@@ -32,14 +34,18 @@ Bug reports
 * valterwill (https://github.com/valterwill)
 * David Herring (https://github.com/abadger1406)
 * Alexandru Kiss (usurel@gmail.com)
-
+* Nate Aune (nate@appsembler.com)
+* Fabio Duran Verdugo (fabiognome@gmail.com)
+* Ed Schipul (eschipul@schipul.com)
 
 Patches
 -------
 * Meurig Freeman (https://github.com/meurig)
 * Sergey Glita (s.v.glita@gmail.com)
 * Brian E (brian@realize.org)
-
+* Bertrand Bordage (https://github.com/BertrandBordage)
+* Iliya Georgiev (ikgeorgiev@gmail.com)
+* Lars Kruse (devel@sumpfralle.de)
 
 Suggestions
 -----------
@@ -48,32 +54,64 @@ Suggestions
 * Barry Rowlingson (http://geospaced.blogspot.com)
 * Gour (https://github.com/gour)
 * Alexandru Kiss (usurel@gmail.com)
+* Stephen Knox
+* Nate Aune (nate@appsembler.com)
+* Ed Schipul (eschipul@schipul.com)
 
 
 Translations
 ------------
+* Bulgarian
+
+  - Iliya Georgiev (ikgeorgiev@gmail.com)
+  - Pavlin Koldamov (pkoldamov@gmail.com)
+
+* Dutch (Netherlands)
+
+  - Lucas Weel (ljj.weel@gmail.com)
+
+* French
+
+  - Pierre Lhoste (peter.cathbad.host@gmail.com)
+  - PatrickHetu (patrick.hetu@gmail.com)
+
+* German (Germany)
+
+  - Tetja Rediske (tetja.rediske@googlemail.com)
+  - Tilmann Sittig (tilmann.sittig@web.de)
+  - Manticor (sl@suchreflex.de)
+
+* Italian
+
+  - Pierpaolo Baldan (pierpaolo.baldan@gmail.com)
+  - SeeOpen.IT (Numero Verde: 800.910.125, E-mail: sales@seeopen.it)
+  - Carlo Zanatto
+
+* Polish
+
+  - mic (diveaway12@gmail.com, winterfall24@gmail.com)
+
 * Portuguese
 
-  - Emerson Soares (http://emersonsoares.com)
-  - Renata Oliveira (https://twitter.com/#!/rnataoliveira)
+  - Vítor Figueiró (vfigueiro@gmail.com)
+
+* Portuguese (Brazil)
+
+  - Emerson Soares (dev.emerson@gmail.com)
+  - Renata Oliveira (renatabels@gmail.com)
+  - Fábio (bnafta@gmail.com)
 
 * Russian
 
   - Sergey Glita (s.v.glita@gmail.com)
 
-* Italian
+* Slovenian (Slovenia)
 
-  - SeeOpen.IT (Numero Verde: 800.910.125, E-mail: sales@seeopen.it)
-  
-* Polish
+  - kontrabant (kontrabant@gmail.com)
 
-  - mic (https://www.transifex.net/accounts/profile/mic/)
+* Spanish
 
-* German
-
-  - Tetja Rediske
-  - Tilmann Sittig
-  
+  - Roberto Rosario
 
 Remote access for debugging
 ---------------------------
@@ -88,3 +126,4 @@ Monetary donations
 * David Herring (https://github.com/abadger1406) - $100
 * David Herring (https://github.com/abadger1406) - $250
 * Michael Terretta (terretta@gmail.com) - $100
+* Ed Schipul (eschipul@schipul.com, http://www.schipul.com) - $100

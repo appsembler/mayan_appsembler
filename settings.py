@@ -2,6 +2,11 @@
 import os
 import sys
 
+from django.core.urlresolvers import reverse
+from django.utils.functional import lazy
+
+reverse_lazy = lazy(reverse, str)
+
 ugettext = lambda s: s
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), './'))
@@ -47,13 +52,19 @@ TIME_ZONE = 'America/Puerto_Rico'
 LANGUAGE_CODE = 'en'
 
 LANGUAGES = (
+    ('ar', ugettext('Arabic')),
+    ('bg', ugettext('Bulgarian')),
+    ('de', ugettext('German (Germany)')),
     ('en', ugettext('English')),
     ('es', ugettext('Spanish')),
-    ('pt', ugettext('Portuguese')),
-    ('ru', ugettext('Russian')),
+    ('fr', ugettext('French')),
     ('it', ugettext('Italian')),
+    ('nl', ugettext('Dutch')),
     ('pl', ugettext('Polish')),
-    ('de', ugettext('German')),
+    ('pt', ugettext('Portuguese')),
+    ('pt-br', ugettext('Portuguese (Brazil)')),
+    ('ru', ugettext('Russian')),
+    ('vi', ugettext('Vietnamese (Viet Nam)')),
 )
 
 SITE_ID = 1
@@ -99,6 +110,7 @@ MIDDLEWARE_CLASSES = (
     'common.middleware.strip_spaces_widdleware.SpacelessMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.transaction.TransactionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -160,6 +172,7 @@ INSTALLED_APPS = (
     'installation',
 # Mayan EDMS
     'storage',
+    'app_registry',
     'folders',
     'tags',
     'document_comments',
@@ -175,7 +188,8 @@ INSTALLED_APPS = (
     'rest_api',
     'document_signatures',
     'checkouts',
-
+    'bootstrap',
+    'registration',
 # Has to be last so the other apps can register it's signals
     'signaler',
 )
@@ -201,8 +215,8 @@ SENDFILE_BACKEND = 'sendfile.backends.simple'
 #--------- Web theme ---------------
 WEB_THEME_ENABLE_SCROLL_JS = False
 #--------- Django -------------------
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = reverse_lazy('login_view')
+LOGIN_REDIRECT_URL = reverse_lazy('home')
 #-------- LoginRequiredMiddleware ----------
 LOGIN_EXEMPT_URLS = (
     r'^favicon\.ico$',
@@ -226,6 +240,10 @@ LOGIN_EXEMPT_URLS = (
 PAGINATION_INVALID_PAGE_RAISES_404 = True
 #---------- Search ------------------
 SEARCH_SHOW_OBJECT_TYPE = False
+
+SERIALIZATION_MODULES = {
+    'better_yaml': 'common.serializers.better_yaml',
+}
 
 try:
     from settings_local import *
